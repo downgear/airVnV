@@ -68,14 +68,9 @@ namespace Airbnb.UserService.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserId1")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.HasIndex("Provider", "ProviderKey")
                         .IsUnique();
@@ -132,29 +127,18 @@ namespace Airbnb.UserService.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserId1")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("UserRefreshTokens", (string)null);
                 });
 
             modelBuilder.Entity("Airbnb.UserService.Domain.UserLogin", b =>
                 {
-                    b.HasOne("Airbnb.UserService.Domain.User", null)
+                    b.HasOne("Airbnb.UserService.Domain.User", "User")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Airbnb.UserService.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -172,15 +156,9 @@ namespace Airbnb.UserService.Migrations
 
             modelBuilder.Entity("Airbnb.UserService.Domain.UserRefreshToken", b =>
                 {
-                    b.HasOne("Airbnb.UserService.Domain.User", null)
+                    b.HasOne("Airbnb.UserService.Domain.User", "User")
                         .WithMany("RefreshTokens")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Airbnb.UserService.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
