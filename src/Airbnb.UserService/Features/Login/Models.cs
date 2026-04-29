@@ -9,7 +9,7 @@ using System.Security.Claims;
 namespace Airbnb.UserService.Features.Login;
 
 public record Request(string Email, string Password);
-public record Response(string Token, string FullName, string Email, UserRole Role);
+public record Response(string AccessToken, string RefreshToken, string FullName, string Email, UserRole Role);
 
 public class Validator : Validator<Request>
 {
@@ -50,14 +50,18 @@ public class Endpoint : FastEndpoints.Endpoint<Request, Response>
         }
 
         var key = config["Jwt:SigningKey"] ?? "SuperSecretKeyThatIsAtLeast32CharsLong!!";
-        var jwtToken = JWTBearer.CreateToken(
+        var accessToken = JWTBearer.CreateToken(
             signingKey: key,
-            expireAt: DateTime.UtcNow.AddDays(1),
+            expireAt: DateTime.UtcNow.AddMinutes(15), // Access Token ngắn hạn
             claims: [
                 new Claim("UserId", user.Id.ToString()),
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             ]);
 
-        Response = new Response(jwtToken, user.Profile.FullName, user.Email, user.Role);
+        var refreshToken = Guid.NewGuid().ToString("N");
+        user.AddRefreshToken(refreshToken, DateTime.UtcNow.AddDays(7));
+        await db.SaveChangesAsync(ct);
+
+        Response = new Response(accessToken, refreshToken, user.Profile.FullName, user.Email, user.Role);
     }
 }
