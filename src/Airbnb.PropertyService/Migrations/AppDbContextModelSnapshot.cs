@@ -93,56 +93,56 @@ namespace Airbnb.PropertyService.Migrations
                         {
                             Id = new Guid("a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1"),
                             Category = "Connectivity",
-                            IconCode = "wifi",
+                            IconCode = "wifi-01",
                             Name = "High-speed Wi-Fi"
                         },
                         new
                         {
                             Id = new Guid("b2b2b2b2-b2b2-b2b2-b2b2-b2b2b2b2b2b2"),
                             Category = "Entertainment",
-                            IconCode = "tv",
+                            IconCode = "tv-01",
                             Name = "HD TV with Netflix"
                         },
                         new
                         {
                             Id = new Guid("c3c3c3c3-c3c3-c3c3-c3c3-c3c3c3c3c3c3"),
                             Category = "Outdoor",
-                            IconCode = "pool",
+                            IconCode = "swimming-pool",
                             Name = "Private Pool"
                         },
                         new
                         {
                             Id = new Guid("d4d4d4d4-d4d4-d4d4-d4d4-d4d4d4d4d4d4"),
                             Category = "Cooking",
-                            IconCode = "kitchen",
+                            IconCode = "kitchen-01",
                             Name = "Fully Equipped Kitchen"
                         },
                         new
                         {
                             Id = new Guid("e5e5e5e5-e5e5-e5e5-e5e5-e5e5e5e5e5e5"),
                             Category = "Facilities",
-                            IconCode = "parking",
+                            IconCode = "parking-area",
                             Name = "Free Parking"
                         },
                         new
                         {
                             Id = new Guid("f6f6f6f6-f6f6-f6f6-f6f6-f6f6f6f6f6f6"),
                             Category = "Comfort",
-                            IconCode = "ac",
+                            IconCode = "snowflake",
                             Name = "Air Conditioning"
                         },
                         new
                         {
                             Id = new Guid("07070707-0707-0707-0707-070707070707"),
                             Category = "Facilities",
-                            IconCode = "washer",
+                            IconCode = "washing-machine-01",
                             Name = "Washing Machine"
                         },
                         new
                         {
                             Id = new Guid("18181818-1818-1818-1818-181818181818"),
                             Category = "Facilities",
-                            IconCode = "gym",
+                            IconCode = "gymnastics",
                             Name = "Gym Access"
                         });
                 });
