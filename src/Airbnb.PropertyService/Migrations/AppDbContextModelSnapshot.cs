@@ -248,6 +248,35 @@ namespace Airbnb.PropertyService.Migrations
                     b.ToTable("property_amenities", (string)null);
                 });
 
+            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.PropertyAvailability", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<Guid>("PropertyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("property_availabilities", (string)null);
+                });
+
             modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.PropertyImage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -366,6 +395,15 @@ namespace Airbnb.PropertyService.Migrations
                 {
                     b.HasOne("Airbnb.PropertyService.Domain.Property", null)
                         .WithMany("PropertyAmenities")
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.PropertyAvailability", b =>
+                {
+                    b.HasOne("Airbnb.PropertyService.Domain.Property", null)
+                        .WithMany("Availabilities")
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -522,6 +560,8 @@ namespace Airbnb.PropertyService.Migrations
 
             modelBuilder.Entity("Airbnb.PropertyService.Domain.Property", b =>
                 {
+                    b.Navigation("Availabilities");
+
                     b.Navigation("Images");
 
                     b.Navigation("PropertyAmenities");
