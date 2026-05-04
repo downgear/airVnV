@@ -98,52 +98,136 @@ namespace Airbnb.PropertyService.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b2b2b2b2-b2b2-b2b2-b2b2-b2b2b2b2b2b2"),
+                            Id = new Guid("a2a2a2a2-a2a2-a2a2-a2a2-a2a2a2a2a2a2"),
+                            Category = "Connectivity",
+                            IconCode = "computer-desk-01",
+                            Name = "Dedicated Workspace"
+                        },
+                        new
+                        {
+                            Id = new Guid("b1b1b1b1-b1b1-b1b1-b1b1-b1b1b1b1b1b1"),
                             Category = "Entertainment",
                             IconCode = "tv-01",
                             Name = "HD TV with Netflix"
                         },
                         new
                         {
-                            Id = new Guid("c3c3c3c3-c3c3-c3c3-c3c3-c3c3c3c3c3c3"),
-                            Category = "Outdoor",
-                            IconCode = "swimming-pool",
-                            Name = "Private Pool"
+                            Id = new Guid("b2b2b2b2-b2b2-b2b2-b2b2-b2b2b2b2b2b2"),
+                            Category = "Entertainment",
+                            IconCode = "music-01",
+                            Name = "Bluetooth Sound System"
                         },
                         new
                         {
-                            Id = new Guid("d4d4d4d4-d4d4-d4d4-d4d4-d4d4d4d4d4d4"),
+                            Id = new Guid("b3b3b3b3-b3b3-b3b3-b3b3-b3b3b3b3b3b3"),
+                            Category = "Entertainment",
+                            IconCode = "game-controller-01",
+                            Name = "Board Games"
+                        },
+                        new
+                        {
+                            Id = new Guid("c1c1c1c1-c1c1-c1c1-c1c1-c1c1c1c1c1c1"),
                             Category = "Cooking",
                             IconCode = "kitchen-01",
                             Name = "Fully Equipped Kitchen"
                         },
                         new
                         {
-                            Id = new Guid("e5e5e5e5-e5e5-e5e5-e5e5-e5e5e5e5e5e5"),
+                            Id = new Guid("c2c2c2c2-c2c2-c2c2-c2c2-c2c2a2a2a2a2"),
+                            Category = "Cooking",
+                            IconCode = "coffee-01",
+                            Name = "Coffee Maker"
+                        },
+                        new
+                        {
+                            Id = new Guid("c3c3c3c3-c3c3-c3c3-c3c3-c3c3c3c3c3c3"),
+                            Category = "Cooking",
+                            IconCode = "microwave-01",
+                            Name = "Microwave"
+                        },
+                        new
+                        {
+                            Id = new Guid("c4c4c4c4-c4c4-c4c4-c4c4-c4c4c4c4c4c4"),
+                            Category = "Cooking",
+                            IconCode = "barbeque",
+                            Name = "BBQ Grill"
+                        },
+                        new
+                        {
+                            Id = new Guid("d1d1d1d1-d1d1-d1d1-d1d1-d1d1d1d1d1d1"),
                             Category = "Facilities",
                             IconCode = "parking-area",
-                            Name = "Free Parking"
+                            Name = "Free Parking on Premises"
                         },
                         new
                         {
-                            Id = new Guid("f6f6f6f6-f6f6-f6f6-f6f6-f6f6f6f6f6f6"),
-                            Category = "Comfort",
-                            IconCode = "snowflake",
-                            Name = "Air Conditioning"
+                            Id = new Guid("d2d2d2d2-d2d2-d2d2-d2d2-d2d2d2d2d2d2"),
+                            Category = "Facilities",
+                            IconCode = "swimming-pool",
+                            Name = "Private Pool"
                         },
                         new
                         {
-                            Id = new Guid("07070707-0707-0707-0707-070707070707"),
+                            Id = new Guid("d3d3d3d3-d3d3-d3d3-d3d3-d3d3d3d3d3d3"),
+                            Category = "Facilities",
+                            IconCode = "gymnastics",
+                            Name = "Gym Access"
+                        },
+                        new
+                        {
+                            Id = new Guid("d4d4d4d4-d4d4-d4d4-d4d4-d4d4d4d4d4d4"),
                             Category = "Facilities",
                             IconCode = "washing-machine-01",
                             Name = "Washing Machine"
                         },
                         new
                         {
-                            Id = new Guid("18181818-1818-1818-1818-181818181818"),
+                            Id = new Guid("d5d5d5d5-d5d5-d5d5-d5d5-d5d5d5d5d5d5"),
                             Category = "Facilities",
-                            IconCode = "gymnastics",
-                            Name = "Gym Access"
+                            IconCode = "elevator",
+                            Name = "Elevator"
+                        },
+                        new
+                        {
+                            Id = new Guid("e1e1e1e1-e1e1-e1e1-e1e1-e1e1e1e1e1e1"),
+                            Category = "Comfort",
+                            IconCode = "snowflake",
+                            Name = "Air Conditioning"
+                        },
+                        new
+                        {
+                            Id = new Guid("e2e2e2e2-e2e2-e2e2-e2e2-e2e2e2e2e2e2"),
+                            Category = "Comfort",
+                            IconCode = "fire-01",
+                            Name = "Heating System"
+                        },
+                        new
+                        {
+                            Id = new Guid("e3e3e3e3-e3e3-e3e3-e3e3-e3e3e3e3e3e3"),
+                            Category = "Comfort",
+                            IconCode = "bubble-chat",
+                            Name = "Essential Toiletries"
+                        },
+                        new
+                        {
+                            Id = new Guid("f1f1f1f1-f1f1-f1f1-f1f1-f1f1f1f1f1f1"),
+                            Category = "Safety",
+                            IconCode = "security-camera-01",
+                            Name = "Security Cameras"
+                        },
+                        new
+                        {
+                            Id = new Guid("f2f2f2f2-f2f2-f2f2-f2f2-f2f2f2f2f2f2"),
+                            Category = "Safety",
+                            IconCode = "notification-01",
+                            Name = "Smoke Alarm"
+                        },
+                        new
+                        {
+                            Id = new Guid("f3f3f3f3-f3f3-f3f3-f3f3-f3f3f3f3f3f3"),
+                            Category = "Safety",
+                            IconCode = "medicine-bottle",
+                            Name = "First Aid Kit"
                         });
                 });
 
