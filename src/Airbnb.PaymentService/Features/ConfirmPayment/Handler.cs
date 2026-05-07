@@ -9,7 +9,6 @@ namespace Airbnb.PaymentService.Features.ConfirmPayment;
 
 public sealed class Handler(
     PaymentDbContext db,
-    IPublishEndpoint publishEndpoint,
     ILogger<Handler> logger)
     : ICommandHandler<Command, bool>
 {
@@ -32,16 +31,7 @@ public sealed class Handler(
         payment.MarkAsSuccess(req.TransactionId);
         await db.SaveChangesAsync(ct);
 
-        // Publish Event for BookingService
-        await publishEndpoint.Publish(new PaymentSucceededEvent(
-            payment.Id,
-            payment.BookingId,
-            payment.Amount,
-            payment.Currency,
-            req.TransactionId
-        ), ct);
-
-        logger.LogInformation("Payment {PaymentId} confirmed and SucceededEvent published for Booking {BookingId}", payment.Id, payment.BookingId);
+        logger.LogInformation("Payment {PaymentId} confirmed and success event staged for Booking {BookingId}", payment.Id, payment.BookingId);
         return true;
     }
 }
