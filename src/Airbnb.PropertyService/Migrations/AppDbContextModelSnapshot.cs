@@ -22,46 +22,6 @@ namespace Airbnb.PropertyService.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.AdminDivision", b =>
-                {
-                    b.Property<string>("Code")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
-
-                    b.PrimitiveCollection<string[]>("Aliases")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
-                    b.Property<string>("CountryCode")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("character varying(2)");
-
-                    b.Property<short>("Level")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("NameEn")
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
-                    b.Property<string>("NameLocal")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
-                    b.Property<string>("ParentCode")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
-
-                    b.HasKey("Code");
-
-                    b.HasIndex("ParentCode");
-
-                    b.HasIndex("CountryCode", "Level");
-
-                    b.ToTable("admin_divisions", (string)null);
-                });
-
             modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.Amenity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -229,79 +189,6 @@ namespace Airbnb.PropertyService.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.Country", b =>
-                {
-                    b.Property<string>("Code")
-                        .HasMaxLength(2)
-                        .HasColumnType("character varying(2)");
-
-                    b.Property<string>("AddressFormConfig")
-                        .HasColumnType("jsonb");
-
-                    b.Property<double>("DefaultLatitude")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("double precision")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<double>("DefaultLongitude")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("double precision")
-                        .HasDefaultValue(0.0);
-
-                    b.Property<bool>("IsSupported")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("NativeCurrency")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("character varying(3)");
-
-                    b.Property<long>("Version")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Code");
-
-                    b.ToTable("Countries", (string)null);
-                });
-
-            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.PaymentGateway", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CountryCode")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("character varying(2)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Provider")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.PrimitiveCollection<string[]>("SupportedCurrencies")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
-                    b.Property<long>("Version")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryCode");
-
-                    b.ToTable("PaymentGateways", (string)null);
-                });
-
             modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.PropertyAmenity", b =>
                 {
                     b.Property<Guid>("PropertyId")
@@ -384,38 +271,6 @@ namespace Airbnb.PropertyService.Migrations
                     b.ToTable("property_images", (string)null);
                 });
 
-            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.Tax", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CountryCode")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("character varying(2)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(5,4)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<long>("Version")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryCode");
-
-                    b.ToTable("Taxes", (string)null);
-                });
-
             modelBuilder.Entity("Airbnb.PropertyService.Domain.Property", b =>
                 {
                     b.Property<Guid>("Id")
@@ -427,12 +282,12 @@ namespace Airbnb.PropertyService.Migrations
                         .HasColumnType("jsonb");
 
                     b.Property<string>("Admin1Code")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Admin2Code")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("CountryCode")
                         .IsRequired()
@@ -668,22 +523,6 @@ namespace Airbnb.PropertyService.Migrations
                     b.ToTable("OutboxState");
                 });
 
-            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.AdminDivision", b =>
-                {
-                    b.HasOne("Airbnb.PropertyService.Domain.Entities.AdminDivision", null)
-                        .WithMany()
-                        .HasForeignKey("ParentCode");
-                });
-
-            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.PaymentGateway", b =>
-                {
-                    b.HasOne("Airbnb.PropertyService.Domain.Entities.Country", null)
-                        .WithMany("PaymentGateways")
-                        .HasForeignKey("CountryCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.PropertyAmenity", b =>
                 {
                     b.HasOne("Airbnb.PropertyService.Domain.Property", null)
@@ -707,15 +546,6 @@ namespace Airbnb.PropertyService.Migrations
                     b.HasOne("Airbnb.PropertyService.Domain.Property", null)
                         .WithMany("Images")
                         .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.Tax", b =>
-                {
-                    b.HasOne("Airbnb.PropertyService.Domain.Entities.Country", null)
-                        .WithMany("Taxes")
-                        .HasForeignKey("CountryCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -791,13 +621,6 @@ namespace Airbnb.PropertyService.Migrations
 
                     b.Navigation("Pricing")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Airbnb.PropertyService.Domain.Entities.Country", b =>
-                {
-                    b.Navigation("PaymentGateways");
-
-                    b.Navigation("Taxes");
                 });
 
             modelBuilder.Entity("Airbnb.PropertyService.Domain.Property", b =>
