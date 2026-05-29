@@ -65,14 +65,10 @@ namespace Airbnb.ChatService.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PropertyId")
-                        .IsUnique()
-                        .HasDatabaseName("uq_conversation_property_no_res")
-                        .HasFilter("\"ReservationId\" IS NULL");
+                        .HasDatabaseName("idx_conversation_property");
 
-                    b.HasIndex("PropertyId", "ReservationId")
-                        .IsUnique()
-                        .HasDatabaseName("uq_conversation_property_res")
-                        .HasFilter("\"ReservationId\" IS NOT NULL");
+                    b.HasIndex("ReservationId")
+                        .HasDatabaseName("idx_conversation_reservation");
 
                     b.ToTable("Conversations");
                 });
