@@ -22,11 +22,71 @@ namespace Airbnb.UserService.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Airbnb.UserService.Domain.KycDocument", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("DocumentType")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("RejectionReason")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<DateTime?>("ReviewedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("SubmittedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("KycDocuments", (string)null);
+                });
+
+            modelBuilder.Entity("Airbnb.UserService.Domain.KycDocumentImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid>("KycDocumentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Label")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KycDocumentId");
+
+                    b.ToTable("KycDocumentImages", (string)null);
+                });
+
             modelBuilder.Entity("Airbnb.UserService.Domain.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("BanReason")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -39,9 +99,23 @@ namespace Airbnb.UserService.Migrations
                     b.Property<string>("HashedPassword")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastLoginAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SuspensionReason")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<long>("Version")
                         .HasColumnType("bigint");
@@ -57,7 +131,6 @@ namespace Airbnb.UserService.Migrations
             modelBuilder.Entity("Airbnb.UserService.Domain.UserLogin", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Provider")
@@ -108,7 +181,6 @@ namespace Airbnb.UserService.Migrations
             modelBuilder.Entity("Airbnb.UserService.Domain.UserRefreshToken", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
@@ -313,6 +385,28 @@ namespace Airbnb.UserService.Migrations
                     b.ToTable("OutboxState");
                 });
 
+            modelBuilder.Entity("Airbnb.UserService.Domain.KycDocument", b =>
+                {
+                    b.HasOne("Airbnb.UserService.Domain.User", "User")
+                        .WithMany("KycDocuments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Airbnb.UserService.Domain.KycDocumentImage", b =>
+                {
+                    b.HasOne("Airbnb.UserService.Domain.KycDocument", "KycDocument")
+                        .WithMany("Images")
+                        .HasForeignKey("KycDocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("KycDocument");
+                });
+
             modelBuilder.Entity("Airbnb.UserService.Domain.UserLogin", b =>
                 {
                     b.HasOne("Airbnb.UserService.Domain.User", "User")
@@ -344,8 +438,15 @@ namespace Airbnb.UserService.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Airbnb.UserService.Domain.KycDocument", b =>
+                {
+                    b.Navigation("Images");
+                });
+
             modelBuilder.Entity("Airbnb.UserService.Domain.User", b =>
                 {
+                    b.Navigation("KycDocuments");
+
                     b.Navigation("Logins");
 
                     b.Navigation("Profile")
