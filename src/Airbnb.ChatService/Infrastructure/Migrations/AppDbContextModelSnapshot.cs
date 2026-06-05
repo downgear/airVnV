@@ -70,6 +70,11 @@ namespace Airbnb.ChatService.Infrastructure.Migrations
                     b.HasIndex("ReservationId")
                         .HasDatabaseName("idx_conversation_reservation");
 
+                    b.HasIndex("PropertyId", "ReservationId")
+                        .IsUnique()
+                        .HasDatabaseName("idx_conversation_property_reservation_unique")
+                        .HasFilter("\"ReservationId\" IS NOT NULL");
+
                     b.ToTable("Conversations");
                 });
 
