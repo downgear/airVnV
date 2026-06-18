@@ -30,6 +30,11 @@ namespace Airbnb.BookingService.Migrations
                     b.Property<decimal>("BasePricePerNight")
                         .HasColumnType("numeric");
 
+                    b.Property<string>("BookingMode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
                     b.Property<Guid?>("CancelledBy")
                         .HasColumnType("uuid");
 
@@ -99,24 +104,6 @@ namespace Airbnb.BookingService.Migrations
                         .HasFilter("\"Status\" != 'Cancelled'");
 
                     b.ToTable("Bookings", (string)null);
-                });
-
-            modelBuilder.Entity("Airbnb.BookingService.Domain.ProcessedEvent", b =>
-                {
-                    b.Property<Guid>("EventId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("EventType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTimeOffset>("ProcessedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("EventId");
-
-                    b.ToTable("ProcessedEvents", (string)null);
                 });
 
             modelBuilder.Entity("MassTransit.EntityFrameworkCoreIntegration.InboxState", b =>
