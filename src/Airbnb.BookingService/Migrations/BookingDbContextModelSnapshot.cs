@@ -35,6 +35,13 @@ namespace Airbnb.BookingService.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
+                    b.Property<string>("CancelReason")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<DateTimeOffset?>("CancelledAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<Guid?>("CancelledBy")
                         .HasColumnType("uuid");
 
@@ -46,6 +53,9 @@ namespace Airbnb.BookingService.Migrations
 
                     b.Property<decimal>("CleaningFee")
                         .HasColumnType("numeric");
+
+                    b.Property<DateTimeOffset?>("ConfirmedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CountryCode")
                         .IsRequired()
